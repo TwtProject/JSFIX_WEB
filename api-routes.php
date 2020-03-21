@@ -1,8 +1,11 @@
 <?php
-    require_once __DIR__ . '/config.php';
+    require_once 'conn/config.php';
+    $login->login_redir();
     class API {
+    var $db;
         function selectData() {
-            $db = new Connect;
+        global $db;
+        $this->db = $db;
             $products = array();
             $data = $db->prepare('SELECT * FROM tb_produk ORDER BY id LIMIT 6');
             $data->execute();
