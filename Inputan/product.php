@@ -1,6 +1,5 @@
 <?php
 require_once 'conn/config.php';
-$login_status = $login->cek_login();
 if (!empty($_POST["add_data"])) {
     $sql = "INSERT INTO tb_produk (nama_produk, link, gambar) VALUES (:nama_produk, :link, :gambar)";
     $pdo_statement = $db->prepare($sql);
@@ -9,6 +8,10 @@ if (!empty($_POST["add_data"])) {
         ':link' => $_POST['link'],
         ':gambar' => $_POST['gambar']
     ));
+    if (!empty($result)) {
+        echo "<script>alert('Data Berhasil Disimpan');document.location.href='dashboard.php?menu=product'</script>";
+    }
+    
 }
 if (!empty($_POST["update_data"])) {
     $sql = "UPDATE tb_produk SET nama_produk = :nama_produk, link = :link, gambar = :gambar WHERE id = '$_GET[id]'";
@@ -18,6 +21,9 @@ if (!empty($_POST["update_data"])) {
         ':link' => $_POST['link'],
         ':gambar' => $_POST['gambar']
     ));
+    if (!empty($result)) {
+        echo "<script>alert('Data Berhasil Diupdate');document.location.href='dashboard.php?menu=product'</script>";
+    }
 }
 if (isset($_GET["edit"])) {
     $sql = "SELECT * FROM tb_produk WHERE id = '$_GET[id]'";
@@ -29,6 +35,9 @@ if (isset($_GET["hapus"])) {
     $sql = "DELETE FROM tb_produk WHERE id = '$_GET[id]'";
     $pdo_statement = $db->prepare($sql);
     $result = $pdo_statement->execute();
+    if (!empty($result)) {
+        echo "<script>alert('Data Berhasil Dihapus');document.location.href='dashboard.php?menu=product'</script>";
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -114,7 +123,7 @@ if (isset($_GET["hapus"])) {
                                                 </div>
                                             </a>
                                         </td>
-                                        <td><a href="dashboard.php?menu=product&hapus&id=<?php echo htmlentities($row->id) ?>">
+                                        <td><a href="dashboard.php?menu=product&hapus&id=<?php echo htmlentities($row->id) ?>" onclick="return confirm('Are you sure to delete ?');">
                                                 <div class="text-center">
                                                     <span class="glyphicon glyphicon-trash"></span>
                                                 </div>

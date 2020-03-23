@@ -1,4 +1,6 @@
-<?php 
+<?php
+include "conn/config.php";
+$login->login_redir();
  ?>
 <!DOCTYPE html>
 <html>
@@ -112,7 +114,6 @@
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="dist/img/avatar.png" class="user-image" alt="User Image">
-              <span class="hidden-xs"><?=@$_SESSION['SES_USER']?></span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
@@ -120,7 +121,7 @@
                 <img src="dist/img/avatar.png" class="img-circle" alt="User Image">
 
                 <p>
-                  <?=@$_SESSION['SES_USER']?> - Sales & Marketing
+                  Sales & Marketing
                   <small>Member since Mei 2018</small>
                 </p>
               </li>

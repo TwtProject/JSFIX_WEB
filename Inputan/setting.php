@@ -1,6 +1,5 @@
 <?php
 require_once 'conn/config.php';
-$login->login_redir();
 if (!empty($_POST["add_data"])) {
     $sql = "INSERT INTO tb_setting (whatsapp, isi_pesan) VALUES (:whatsapp, :isi_pesan)";
     $pdo_statement = $db->prepare($sql);
@@ -8,6 +7,9 @@ if (!empty($_POST["add_data"])) {
         ':whatsapp' => $_POST['whatsapp'],
         ':isi_pesan' => $_POST['isi_pesan']
     ));
+    if (!empty($result)) {
+        echo "<script>alert('Data Berhasil Disimpan');document.location.href='dashboard.php?menu=setting'</script>";
+    }
 }
 if (!empty($_POST["update_data"])) {
     $sql = "UPDATE tb_setting SET whatsapp = :whatsapp, isi_pesan = :isi_pesan WHERE id = '$_GET[id]'";
@@ -16,6 +18,9 @@ if (!empty($_POST["update_data"])) {
         ':whatsapp' => $_POST['whatsapp'],
         ':isi_pesan' => $_POST['isi_pesan']
     ));
+    if (!empty($result)) {
+        echo "<script>alert('Data Berhasil Diupdate');document.location.href='dashboard.php?menu=setting'</script>";
+    }
 }
 if (isset($_GET["edit"])) {
     $sql = "SELECT * FROM tb_setting WHERE id = '$_GET[id]'";
@@ -27,6 +32,9 @@ if (isset($_GET["hapus"])) {
     $sql = "DELETE FROM tb_setting WHERE id = '$_GET[id]'";
     $pdo_statement = $db->prepare($sql);
     $result = $pdo_statement->execute();
+    if (!empty($result)) {
+        echo "<script>alert('Data Berhasil Dihapus');document.location.href='dashboard.php?menu=setting'</script>";
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -44,7 +52,7 @@ if (isset($_GET["hapus"])) {
     <div class="container">
         <div class="row">
             <br><br>
-            <div class="col-sm-4">
+            <div class="col-sm-3">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         Input Setting
@@ -106,7 +114,7 @@ if (isset($_GET["hapus"])) {
                                                 </div>
                                             </a>
                                         </td>
-                                        <td><a href="dashboard.php?menu=setting&hapus&id=<?php echo htmlentities($row->id) ?>">
+                                        <td><a href="dashboard.php?menu=setting&hapus&id=<?php echo htmlentities($row->id) ?>" onclick="return confirm('Are you sure to delete ?');">
                                                 <div class="text-center">
                                                     <span class="glyphicon glyphicon-trash"></span>
                                                 </div>
