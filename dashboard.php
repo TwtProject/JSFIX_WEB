@@ -151,7 +151,7 @@ $login->login_redir();
           <img src="dist/img/avatar.png" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p><?=@$_SESSION['SES_USER']?></p>
+          <p><?php echo $_SESSION['SES_USER']?></p>
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>

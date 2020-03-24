@@ -18,6 +18,7 @@
             if (password_verify($password, $password_db)) {
                 $login->true_login($username);
                 create_alert("success", "Login Berhasil", "index.php");
+                $_SESSION['SES_USER'] = $username;
             }else{
                 $login->salah_login_action($username);
                 create_alert("error", "Username atau Password Salah", "index.php");

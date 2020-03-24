@@ -1,5 +1,5 @@
 <?php
-    include "config.php";
+    include "conn/config.php";
     $username = "admin";
     $password = "admin123";
     $nama = "Admin 123";

@@ -28,6 +28,8 @@
                             "email" => $rget['email'],
                             "akses" => $rget['akses']
                         );
+                    }else{
+                        $this->logout();
                     }
                 }
             }
