@@ -73,7 +73,8 @@
             ));
 
             $expr = 0;
-            setcookie("adv_token", $token, $expr, "/");
+	    setcookie("adv_token", $token, $expr, "/");
+	    $_SESSION['SES_USER'] = $username;
 
             return true;
         }
